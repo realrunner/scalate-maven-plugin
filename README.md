@@ -50,6 +50,15 @@ pom.xml
 ```
 
 
+Publishing
+---
+
+```
+GPG_TTY=$(tty)
+export GPG_TTY
+mvn deploy -DperformRelease=true -Dgpg.keyname= -Dmaven.javadoc.skip=true
+```
+
 [1]: http://maven.apache.org
 [2]: http://scalate.github.io/scalate
 [3]: https://github.com/scalate/scalate

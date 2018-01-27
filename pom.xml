@@ -23,11 +23,33 @@
 
   <groupId>com.stephenn</groupId>
   <artifactId>scalate-maven-plugin_2.12</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.2-SNAPSHOT</version>
   <packaging>maven-plugin</packaging>
 
   <name>Scalate Maven Plugin</name>
   <description>A Maven Plugin for pre-compiling Scalate template files.</description>
+  <url>https://github.com/stephennancekivell/scalate-maven-plugin</url>
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>stephen</id>
+      <name>Stephen Nancekivell</name>
+      <url>https://stephenn.com/</url>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:git://github.com/stephennancekivell/scalate-maven-plugin.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com:stephennancekivell/scalate-maven-plugin.git</developerConnection>
+    <url>http://github.com/stephennancekivell/scalate-maven-plugin</url>
+  </scm>
 
   <prerequisites>
     <maven>${version.maven}</maven>
@@ -111,6 +133,17 @@
 
   </dependencies>
 
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
+
   <build>
 
     <sourceDirectory>src/main/java</sourceDirectory>
@@ -136,7 +169,49 @@
         <artifactId>maven-plugin-plugin</artifactId>
         <version>2.5.1</version>
       </plugin>
+
+      <plugin>
+        <groupId>org.sonatype.plugins</groupId>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
+        <version>1.6.7</version>
+        <extensions>true</extensions>
+        <configuration>
+          <serverId>ossrh</serverId>
+          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+          <autoReleaseAfterClose>true</autoReleaseAfterClose>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.2.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>1.5</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
+
 
   </build>
 
