@@ -23,7 +23,7 @@
 
   <groupId>com.stephenn</groupId>
   <artifactId>scalate-maven-plugin_2.12</artifactId>
-  <version>0.0.2-SNAPSHOT</version>
+  <version>0.0.2</version>
   <packaging>maven-plugin</packaging>
 
   <name>Scalate Maven Plugin</name>
@@ -159,6 +159,14 @@
       <plugin>
         <groupId>net.alchim31.maven</groupId>
         <artifactId>scala-maven-plugin</artifactId>
+         <executions>
+          <execution>
+            <goals>
+              <goal>compile</goal>
+              <goal>testCompile</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
