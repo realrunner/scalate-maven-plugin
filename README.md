@@ -5,6 +5,7 @@ A [Maven][1] plugin for pre-compiling [Scalate][2] templates.
 
 history
 ---
+March 2020. Support for scala 2.13
 This plugin was separated from the main [scalate repository][3] in March 2015.
 This plugin was forked from `"org.scalatra.scalate" % "maven-scalate-plugin_2.11" % "1.7.1"` to add support for scala 2.12
 
