@@ -23,7 +23,7 @@
 
   <groupId>com.stephenn</groupId>
   <artifactId>scalate-maven-plugin_2.13</artifactId>
-  <version>0.0.3-SNAPSHOT</version>
+  <version>0.0.3</version>
   <packaging>maven-plugin</packaging>
 
   <name>Scalate Maven Plugin</name>
