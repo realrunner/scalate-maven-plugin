@@ -22,7 +22,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.stephenn</groupId>
-  <artifactId>scalate-maven-plugin_2.12</artifactId>
+  <artifactId>scalate-maven-plugin_2.13</artifactId>
   <version>0.0.3-SNAPSHOT</version>
   <packaging>maven-plugin</packaging>
 
@@ -56,8 +56,8 @@
   </prerequisites>
 
   <properties>
-    <version.scala.binary>2.12</version.scala.binary>
-    <version.scala>${version.scala.binary}.4</version.scala>
+    <version.scala.binary>2.13</version.scala.binary>
+    <version.scala>${version.scala.binary}.1</version.scala>
     <version.maven>3.0.4</version.maven>
     <version.wagon>2.2</version.wagon>
     <version.slf4j>1.6.1</version.slf4j>

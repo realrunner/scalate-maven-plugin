@@ -32,13 +32,13 @@ class PrecompileMojoSupport {
 
   def apply(mojo:PrecompileMojo) = {
     import mojo._;
-    import scala.collection.JavaConversions._
+    import scala.jdk.CollectionConverters._
 
     //
     // Lets use project's classpath when we run the pre-compiler tool
     //
 
-    val urls: Array[URL] = classPathElements.map { d =>
+    val urls: Array[URL] = classPathElements.asScala.map { d =>
       new File(d.toString).toURI.toURL
     }.toArray
 
@@ -68,7 +68,7 @@ class PrecompileMojoSupport {
       precompiler.sources = Array(mojo.warSourceDirectory, mojo.resourcesSourceDirectory)
       precompiler.workingDirectory = mojo.targetDirectory
       precompiler.targetDirectory = mojo.classesDirectory      
-      precompiler.templates = mojo.templates.toList.toArray
+      precompiler.templates = mojo.templates.asScala.toList.toArray
       precompiler.contextClass = mojo.contextClass
       precompiler.bootClassName = mojo.bootClassName
       precompiler.execute

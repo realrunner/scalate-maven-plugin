@@ -33,14 +33,14 @@ class SiteGenNoForkMojoSupport {
 
   def apply(mojo:SiteGenNoForkMojo) {
     import mojo._
-    import scala.collection.JavaConversions._
+    import scala.jdk.CollectionConverters._
 
     if (skip.toBoolean) { return }
 
     //
     // Lets use project's classpath when we run the site gen tool
     //
-    val urls: Array[URL] = testClassPathElements.map { d =>
+    val urls: Array[URL] = testClassPathElements.asScala.map { d =>
       new File(d.toString).toURI.toURL
     }.toArray
 
