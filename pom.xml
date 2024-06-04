@@ -18,17 +18,19 @@
     limitations under the License.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.stephenn</groupId>
+  <groupId>com.realrunners</groupId>
   <artifactId>scalate-maven-plugin_2.13</artifactId>
-  <version>0.0.3</version>
+  <version>0.0.4</version>
   <packaging>maven-plugin</packaging>
 
   <name>Scalate Maven Plugin</name>
   <description>A Maven Plugin for pre-compiling Scalate template files.</description>
-  <url>https://github.com/stephennancekivell/scalate-maven-plugin</url>
+  <url>https://github.com/realrunner/scalate-maven-plugin</url>
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
@@ -39,16 +41,16 @@
 
   <developers>
     <developer>
-      <id>stephen</id>
-      <name>Stephen Nancekivell</name>
-      <url>https://stephenn.com/</url>
+      <id>realrunner</id>
+      <name>Mike Nelson</name>
+      <url>https://realrunners.com/</url>
     </developer>
   </developers>
 
   <scm>
-    <connection>scm:git:git://github.com/stephennancekivell/scalate-maven-plugin.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com:stephennancekivell/scalate-maven-plugin.git</developerConnection>
-    <url>http://github.com/stephennancekivell/scalate-maven-plugin</url>
+    <connection>scm:git:git://github.com/realrunner/scalate-maven-plugin.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com:realrunner/scalate-maven-plugin.git</developerConnection>
+    <url>http://github.com/realrunner/scalate-maven-plugin</url>
   </scm>
 
   <prerequisites>
@@ -57,7 +59,7 @@
 
   <properties>
     <version.scala.binary>2.13</version.scala.binary>
-    <version.scala>${version.scala.binary}.1</version.scala>
+    <version.scala>${version.scala.binary}.14</version.scala>
     <version.maven>3.0.4</version.maven>
     <version.wagon>2.2</version.wagon>
     <version.slf4j>1.6.1</version.slf4j>
@@ -71,7 +73,7 @@
       <version>${version.scala}</version>
       <scope>compile</scope>
     </dependency>
-    
+
     <dependency>
       <groupId>org.scala-lang</groupId>
       <artifactId>scala-compiler</artifactId>
@@ -79,7 +81,7 @@
       <scope>compile</scope>
       <optional>false</optional>
     </dependency>
-    
+
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-nop</artifactId>
@@ -124,7 +126,7 @@
       <artifactId>plexus-utils</artifactId>
       <version>2.0.2</version>
     </dependency>
-    
+
     <dependency>
       <groupId>org.codehaus.swizzle</groupId>
       <artifactId>swizzle-confluence</artifactId>
@@ -132,7 +134,7 @@
     </dependency>
 
   </dependencies>
-
+  <!-- 
   <distributionManagement>
     <snapshotRepository>
       <id>ossrh</id>
@@ -142,7 +144,7 @@
       <id>ossrh</id>
       <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
-  </distributionManagement>
+  </distributionManagement> -->
 
   <build>
 
@@ -159,7 +161,7 @@
       <plugin>
         <groupId>net.alchim31.maven</groupId>
         <artifactId>scala-maven-plugin</artifactId>
-         <executions>
+        <executions>
           <execution>
             <goals>
               <goal>compile</goal>
@@ -171,13 +173,17 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>21</source>
+          <target>21</target>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-plugin-plugin</artifactId>
         <version>2.5.1</version>
       </plugin>
-
+      <!-- 
       <plugin>
         <groupId>org.sonatype.plugins</groupId>
         <artifactId>nexus-staging-maven-plugin</artifactId>
@@ -188,7 +194,7 @@
           <nexusUrl>https://oss.sonatype.org/</nexusUrl>
           <autoReleaseAfterClose>true</autoReleaseAfterClose>
         </configuration>
-      </plugin>
+      </plugin> -->
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -197,6 +203,7 @@
         <executions>
           <execution>
             <id>attach-sources</id>
+            <phase>package</phase>
             <goals>
               <goal>jar-no-fork</goal>
             </goals>
@@ -218,8 +225,19 @@
           </execution>
         </executions>
       </plugin>
-    </plugins>
 
+      <plugin>
+        <groupId>org.sonatype.central</groupId>
+        <artifactId>central-publishing-maven-plugin</artifactId>
+        <version>0.4.0</version>
+        <extensions>true</extensions>
+        <configuration>
+          <publishingServerId>central</publishingServerId>
+          <tokenAuth>true</tokenAuth>
+        </configuration>
+      </plugin>
+
+    </plugins>
 
   </build>
 

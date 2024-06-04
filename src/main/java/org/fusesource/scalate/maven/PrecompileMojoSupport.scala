@@ -54,7 +54,7 @@ class PrecompileMojoSupport {
         var workingDirectory: File
         var targetDirectory: File
         var templates: Array[String]
-        var info: {def apply(v1:String):Unit}
+        var info: String => Unit
         var contextClass: String
         var bootClassName:String
         def execute(): Unit
